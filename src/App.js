@@ -5,7 +5,8 @@ import TodoFeature from './features/Todo';
 import { Route } from 'react-router-dom';
 import AlbumFeature from './features/Album';
 import { Link } from 'react-router-dom';
-import { NavLink } from 'react-router-dom/cjs/react-router-dom.min';
+import { NavLink, Switch } from 'react-router-dom/cjs/react-router-dom.min';
+import NotFound from './components/NotFound';
 function App() {
 
   return (
@@ -18,11 +19,13 @@ function App() {
       <p><NavLink to="/todos">Todos</NavLink></p>
       <p><NavLink to="/albums">Album</NavLink></p>
 
+      <Switch>
+        <Route path="/" component={TodoFeature} exact />
+        <Route path="/todo-list" component={TodoFeature} />
+        <Route path="/albums" component={AlbumFeature} />
 
-
-      <Route path="/todos" component={TodoFeature} />
-      <Route path="/albums" component={AlbumFeature} />
-
+        <Route component={NotFound} />
+      </Switch>
       Footer
     </div>
   );
