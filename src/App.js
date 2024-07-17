@@ -21,7 +21,7 @@ function App() {
 
       <Switch>
         <Route path="/" component={TodoFeature} exact />
-        <Route path="/todo-list" component={TodoFeature} />
+        <Route path="/todos" component={TodoFeature} />
         <Route path="/albums" component={AlbumFeature} />
 
         <Route component={NotFound} />

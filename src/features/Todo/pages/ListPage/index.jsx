@@ -29,20 +29,19 @@ function ListPage(props) {
         },
     ];
     ////////////////////////
+
+
+
     const [todoList, setTodoList] = useState(initTodoList);//Sử dụng State để thay đổi các thuộc tính trong mảng
 
-
     const handleTodoClick = (todo, idx) => { // Tạo ra hàm để thực hiện sau mỗi lần click 
-
         const newtodoList = [...todoList];// tạo ra mảng mới 
-
         console.log(todo, idx);//in ra giá trị thành phần của mảng và vị trí của thành phần
-        newtodoList[idx] = { //Thay đổi phụ thuộc vào vị trí trong mảng 
-            ...newtodoList[idx],
-            status: newtodoList[idx].status === 'new' ? 'completed' : 'new',// thay đổi trạng thái của vị trí đó 
-        };
+        newtodoList[idx] = { ...newtodoList[idx], status: newtodoList[idx].status === 'new' ? 'completed' : 'new' };
         setTodoList(newtodoList);// gán giá trị mới cho vị trí trong mảng
     }
+
+
 
     ///////////////////////////
     const location = useLocation();
@@ -55,10 +54,13 @@ function ListPage(props) {
         return param.status || 'all';
     });
 
+
     useEffect(() => {
         const param = queryString.parse(location.search);
         setfilterTodolist(param.status || 'all');
     }, [location.search])
+
+
 
     const handleShowAllView = () => {
         // setfilterTodolist('tatca');//Hiển thị all
@@ -68,6 +70,8 @@ function ListPage(props) {
             search: queryString.stringify(queryParam),
         })
     }
+
+
     const handleShowCompleted = () => {
         // setfilterTodolist('completed');//Hiển thị completed
         const queryParam = { status: 'completed' };
@@ -76,6 +80,8 @@ function ListPage(props) {
             search: queryString.stringify(queryParam),
         })
     }
+
+
     const handleShowNewClick = () => {
         const queryParam = { status: 'new' };
         history.push({
@@ -83,12 +89,15 @@ function ListPage(props) {
             search: queryString.stringify(queryParam),
         })
         // setfilterTodolist('new');//Hiển thị new
-
     }
 
-    const referedTodolist = todoList.filter(todo => filterTodolist === 'tatca' || filterTodolist === todo.status);
 
+
+    const referedTodolist = todoList.filter(todo => filterTodolist === 'all' || filterTodolist === todo.status);
     console.log(referedTodolist);
+
+
+
     return (
         <div>
             <h3>Todo List</h3>
